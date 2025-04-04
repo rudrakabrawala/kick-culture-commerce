@@ -1,4 +1,3 @@
-
 import { toast } from 'sonner';
 
 // Define the Razorpay options interface
@@ -58,12 +57,12 @@ const createRazorpayOrder = (
   const amountInSmallestUnit = amount * 100;
   
   const options: RazorpayOptions = {
-    key: 'rzp_test_YOUR_KEY_ID', // Replace with your Razorpay test key
+    key: 'rzp_test_Bi9C65ucH9IQwO', // Updated with your Razorpay test key
     amount: amountInSmallestUnit,
     currency: 'INR', // Change as needed
     name: 'Sneaker Shop',
     description: 'Purchase of sneakers',
-    image: '/logo.png', // Add your logo here
+    image: '/path/to/your/logo.png', // Update with the correct path to your logo
     order_id: orderId,
     handler: function (response) {
       const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
