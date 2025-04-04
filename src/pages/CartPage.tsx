@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Trash2, ShoppingBag, ChevronLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Button } from '@/components/ui/button';
-import RazorpayCheckout from '../components/RazorpayCheckout';
+import StripeCheckout from '../components/StripeCheckout';
 
 const CartPage: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
@@ -161,7 +162,7 @@ const CartPage: React.FC = () => {
             </div>
           </div>
           
-          <RazorpayCheckout amount={totalWithShipping} />
+          <StripeCheckout amount={totalWithShipping} />
           
           <div className="text-xs text-center text-gray-500 mt-4">
             Taxes calculated at checkout. Shipping calculated based on delivery location.
