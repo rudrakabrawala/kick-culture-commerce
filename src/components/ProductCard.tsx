@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../data/products';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface ProductCardProps {
   product: Product;
@@ -14,21 +15,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <Link to={`/product/${id}`} className="group">
-      <div className="overflow-hidden rounded-lg aspect-square relative bg-gray-100">
-        <img
-          src={images[0]}
-          alt={name}
-          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-        />
+      <div className="overflow-hidden rounded-lg relative bg-gray-100">
+        <AspectRatio ratio={1 / 1}>
+          <img
+            src={images[0]}
+            alt={name}
+            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        </AspectRatio>
         
         {isNew && (
-          <span className="absolute top-2 left-2 bg-black px-2 py-1 text-xs font-medium text-white">
+          <span className="absolute top-2 left-2 bg-black px-2 py-1 text-xs font-medium text-white rounded">
             New
           </span>
         )}
         
         {originalPrice && (
-          <span className="absolute top-2 right-2 bg-secondary px-2 py-1 text-xs font-medium text-white">
+          <span className="absolute top-2 right-2 bg-red-500 px-2 py-1 text-xs font-medium text-white rounded">
             {discountPercentage}% OFF
           </span>
         )}

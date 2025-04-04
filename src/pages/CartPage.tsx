@@ -1,18 +1,12 @@
-
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Trash2, ShoppingBag, ChevronLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Button } from '@/components/ui/button';
+import RazorpayCheckout from '../components/RazorpayCheckout';
 
 const CartPage: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
-  const navigate = useNavigate();
-
-  const handleCheckout = () => {
-    // In a real app, this would navigate to checkout or trigger checkout modal
-    alert('This would proceed to checkout in a real app');
-  };
 
   if (cart.length === 0) {
     return (
@@ -29,6 +23,9 @@ const CartPage: React.FC = () => {
       </div>
     );
   }
+
+  const shippingCost = cartTotal >= 100 ? 0 : 5;
+  const totalWithShipping = cartTotal + shippingCost;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -160,16 +157,11 @@ const CartPage: React.FC = () => {
           <div className="border-t border-gray-300 pt-4 mb-6">
             <div className="flex justify-between font-bold">
               <span>Total</span>
-              <span>${(cartTotal + (cartTotal >= 100 ? 0 : 5)).toFixed(2)}</span>
+              <span>${totalWithShipping.toFixed(2)}</span>
             </div>
           </div>
           
-          <Button 
-            onClick={handleCheckout}
-            className="w-full"
-          >
-            Proceed to Checkout
-          </Button>
+          <RazorpayCheckout amount={totalWithShipping} />
           
           <div className="text-xs text-center text-gray-500 mt-4">
             Taxes calculated at checkout. Shipping calculated based on delivery location.
