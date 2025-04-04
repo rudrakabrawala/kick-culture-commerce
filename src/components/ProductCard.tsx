@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="overflow-hidden rounded-lg relative bg-gray-100">
         <AspectRatio ratio={1 / 1}>
           <img
-            src={images[0]}
+            src={images[0] || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"}
             alt={name}
             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
